@@ -2,10 +2,6 @@ import React, { Component } from 'react';
 import CheatStep from 'components/CheatStep';
 
 class CheatSheet extends Component {
-  handleEnter(event) {
-    console.log(event);
-  }
-
   render() {
     return (
       <div>
@@ -16,6 +12,12 @@ class CheatSheet extends Component {
         <div className="new-step">+ Next step ...</div>
       </div>
     );
+  }
+
+  handleEnter(event) {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+    }
   }
 }
 
