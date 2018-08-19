@@ -5,10 +5,8 @@ class CheatSheet extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      stepId: 1,
-      steps: [
-        { instruction: '', id: 1 },
-      ],
+      stepId: 0,
+      steps: [],
     };
   }
 
@@ -34,22 +32,30 @@ class CheatSheet extends Component {
     );
   }
 
+  componentDidMount() {
+    this.newStep();
+  }
+
   handleInput(event) {
     if (event.key === 'Enter') {
       event.preventDefault();
-      const nextId = this.state.stepId + 1;
-
-      this.setState({
-        stepId: nextId,
-        steps: [
-          ...this.state.steps,
-          {
-            instruction: '',
-            id: nextId,
-          }
-        ],
-      });
+      this.newStep();
     }
+  }
+
+  newStep() {
+    const nextId = this.state.stepId + 1;
+
+    this.setState({
+      stepId: nextId,
+      steps: [
+        ...this.state.steps,
+        {
+          instruction: '',
+          id: nextId,
+        }
+      ],
+    });
   }
 }
 
