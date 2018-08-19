@@ -4,7 +4,7 @@ class CheatStep extends Component {
   render() {
     return (
       <div
-        ref={newStep => this.newStep = newStep}
+        ref={step => this[`stepId${this.props.step.id}`] = step}
         contentEditable={true}
         className="cheat-step"
         onKeyDown={this.props.handleInput}
@@ -13,7 +13,7 @@ class CheatStep extends Component {
   }
 
   componentDidMount() {
-    this.newStep.focus();
+    this[`stepId${this.props.step.id}`].focus();
   }
 }
 

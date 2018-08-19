@@ -20,7 +20,7 @@ class CheatSheet extends Component {
               (step) => (
                 <CheatStep
                   key={step.id}
-                  instruction={step.instruction}
+                  step={step}
                   handleInput={this.handleInput.bind(this, step.id)}
                 />
               )
