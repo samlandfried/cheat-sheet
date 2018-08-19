@@ -5,6 +5,7 @@ class CheatSheet extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      stepId: 1,
       steps: [
         { instruction: '', id: 1 },
       ],
@@ -22,7 +23,7 @@ class CheatSheet extends Component {
                 <CheatStep
                   key={step.id}
                   instruction={step.instruction}
-                  handleInput={this.handleInput}
+                  handleInput={this.handleInput.bind(this)}
                 />
               )
             )
@@ -36,6 +37,18 @@ class CheatSheet extends Component {
   handleInput(event) {
     if (event.key === 'Enter') {
       event.preventDefault();
+      const nextId = this.state.stepId + 1;
+
+      this.setState({
+        stepId: nextId,
+        steps: [
+          ...this.state.steps,
+          {
+            instruction: '',
+            id: nextId,
+          }
+        ],
+      });
     }
   }
 }
