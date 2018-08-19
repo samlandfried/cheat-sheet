@@ -7,7 +7,7 @@ class CheatStep extends Component {
         ref={newStep => this.newStep = newStep}
         contentEditable={true}
         className="cheat-step"
-        onKeyPress={this.props.handleInput}
+        onKeyDown={this.props.handleInput}
       ></div>
     );
   }

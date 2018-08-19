@@ -21,7 +21,7 @@ class CheatSheet extends Component {
                 <CheatStep
                   key={step.id}
                   instruction={step.instruction}
-                  handleInput={this.handleInput.bind(this)}
+                  handleInput={this.handleInput.bind(this, step.id)}
                 />
               )
             )
@@ -36,10 +36,19 @@ class CheatSheet extends Component {
     this.newStep();
   }
 
-  handleInput(event) {
-    if (event.key === 'Enter') {
-      event.preventDefault();
-      this.newStep();
+  handleInput(id, event) {
+    switch (event.key) {
+      case 'Enter':
+        event.preventDefault();
+        this.newStep();
+        break;
+      case 'ArrowUp':
+        console.log('Arrow up!')
+        break;
+      case 'ArrowDown':
+        console.log('Arrow up!')
+        break;
+      default: break;
     }
   }
 
