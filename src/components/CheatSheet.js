@@ -42,7 +42,7 @@ class CheatSheet extends Component {
     switch (event.key) {
       case 'Enter':
         event.preventDefault();
-        this.newStep();
+        this.newStep({ after: focusedId });
         break;
       case 'ArrowUp':
         this.navigate({ up: 1, from: focusedId });
@@ -79,19 +79,31 @@ class CheatSheet extends Component {
     domStep.focus();
   }
 
-  newStep() {
+  newStep({ after } = {}) {
     const nextId = this.state.stepId + 1;
+    if (after && this.state.steps.length) {
+      const steps = [...this.state.steps];
+      const indexToInsertAfter = this.state.steps.findIndex(step => step.id === after);
 
-    this.setState({
-      stepId: nextId,
-      steps: [
-        ...this.state.steps,
-        {
+      steps.splice(indexToInsertAfter + 1, 0, {
+        instruction: '',
+        id: nextId,
+      })
+
+      this.setState({
+        stepId: nextId,
+        steps,
+      });
+    }
+    else {
+      this.setState({
+        stepId: nextId,
+        steps: [{
           instruction: '',
           id: nextId,
-        }
-      ],
-    });
+        }],
+      });
+    }
   }
 }
 
