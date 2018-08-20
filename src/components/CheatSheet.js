@@ -50,8 +50,27 @@ class CheatSheet extends Component {
       case 'ArrowDown':
         this.navigate({ down: 1, from: focusedId });
         break;
+      case 'Backspace':
+        const stepIsEmpty = event.target.innerText.length === 0;
+        const isNotLastStep = this.state.steps.length > 1;
+
+        if (stepIsEmpty && isNotLastStep) {
+          this.removeStep(focusedId);
+        }
+        break;
       default: break;
     }
+  }
+
+  removeStep(id) {
+    this.navigate({ up: 1, from: id })
+    const steps = [...this.state.steps]
+
+    const indexToRemove = steps.findIndex(step => step.id === id);
+
+    steps.splice(indexToRemove, 1);
+
+    this.setState({ steps });
   }
 
   navigate({ up = 0, down = 0, from } = {}) {
