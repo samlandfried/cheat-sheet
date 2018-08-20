@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import CheatStep from 'components/CheatStep';
 
 class CheatSheet extends Component {
@@ -20,6 +21,7 @@ class CheatSheet extends Component {
               (step) => (
                 <CheatStep
                   key={step.id}
+                  ref={`stepId${step.id}`}
                   step={step}
                   handleInput={this.handleInput.bind(this, step.id)}
                 />
@@ -36,20 +38,45 @@ class CheatSheet extends Component {
     this.newStep();
   }
 
-  handleInput(id, event) {
+  handleInput(focusedId, event) {
     switch (event.key) {
       case 'Enter':
         event.preventDefault();
         this.newStep();
         break;
       case 'ArrowUp':
-        console.log('Arrow up!')
+        this.navigate({ up: 1, from: focusedId });
         break;
       case 'ArrowDown':
-        console.log('Arrow up!')
+        this.navigate({ down: 1, from: focusedId });
         break;
       default: break;
     }
+  }
+
+  navigate({ up = 0, down = 0, from } = {}) {
+    if (!from || (!up && !down)) {
+      console.warn('Required params: { from: stepId AND up: number of steps OR down: number of steps');
+      return;
+    }
+
+    const { steps } = this.state;
+
+    const focusedStepIndex = steps.findIndex(step => from === step.id);
+    const stepsToMove = up - down;
+    let newStepToFocus = focusedStepIndex - stepsToMove;
+    if (newStepToFocus < 0) {
+      newStepToFocus = 0;
+    }
+    else if (newStepToFocus >= steps.length) {
+      newStepToFocus = steps.length - 1;
+    }
+    const idOfStepToFocus = steps[newStepToFocus].id;
+
+    const reactStep = this.refs[`stepId${idOfStepToFocus}`];
+    const domStep = ReactDOM.findDOMNode(reactStep);
+
+    domStep.focus();
   }
 
   newStep() {
