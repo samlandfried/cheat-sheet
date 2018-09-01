@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import CheatSheet from 'components/CheatSheet';
-import './App.css';
 
 class App extends Component {
   render() {
