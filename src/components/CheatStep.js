@@ -7,13 +7,18 @@ class CheatStep extends Component {
         ref={step => this.newStep = step}
         contentEditable={true}
         className="cheat-step"
-        onKeyDown={this.props.handleInput}
+        onKeyUp={this.props.handleInput}
+        onKeyDown={this.preventDefault}
       ></div>
     );
   }
 
   componentDidMount() {
     this.newStep.focus();
+  }
+
+  preventDefault(event) {
+    if (event.key === 'Enter') event.preventDefault();
   }
 }
 

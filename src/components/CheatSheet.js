@@ -41,7 +41,6 @@ class CheatSheet extends Component {
   handleInput(focusedId, event) {
     switch (event.key) {
       case 'Enter':
-        event.preventDefault();
         this.newStep({ after: focusedId });
         break;
       case 'ArrowUp':
@@ -58,7 +57,10 @@ class CheatSheet extends Component {
           this.removeStep(focusedId);
         }
         break;
-      default: break;
+      default:
+        const instruction = event.target.innerText;
+        const step = this.state.steps.find(step => step.id === focusedId);
+        step.instruction = instruction;
     }
   }
 
