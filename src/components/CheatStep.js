@@ -3,13 +3,13 @@ import React, { Component } from 'react';
 class CheatStep extends Component {
   render() {
     return (
-      <div
+      <li
         ref={step => this.newStep = step}
         contentEditable={true}
         className="cheat-step"
         onKeyUp={this.props.handleInput}
         onKeyDown={this.preventDefault}
-      ></div>
+      ></li>
     );
   }
 

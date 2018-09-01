@@ -15,7 +15,7 @@ class CheatSheet extends Component {
     return (
       <div>
         <h4 className="cheat-sheet-title">New Cheat Sheet</h4>
-        <div className="cheat-steps">
+        <ol className="cheat-steps">
           {
             this.state.steps.map(
               (step) => (
@@ -28,8 +28,7 @@ class CheatSheet extends Component {
               )
             )
           }
-        </div>
-        <div className="new-step">+ Next step ...</div>
+        </ol>
       </div>
     );
   }
