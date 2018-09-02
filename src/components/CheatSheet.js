@@ -18,9 +18,9 @@ class CheatSheet extends Component {
         <h4
           className="cheat-sheet-title"
           contentEditable={true}
-          onSelect={this.selectTitle}
           onKeyUp={this.changeTitle.bind(this)}
-        >Cheat Name</h4>
+          ref={title => this.title = title}
+        />
         <ol className="cheat-steps">
           {
             this.state.steps.map(
@@ -40,6 +40,7 @@ class CheatSheet extends Component {
   }
 
   componentDidMount() {
+    this.title.innerText = this.state.title;
     this.newStep();
   }
 
