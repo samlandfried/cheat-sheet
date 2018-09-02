@@ -8,13 +8,19 @@ class CheatSheet extends Component {
     this.state = {
       stepId: 0,
       steps: [],
+      title: 'Cheat Name',
     };
   }
 
   render() {
     return (
       <div>
-        <h4 className="cheat-sheet-title">New Cheat Sheet</h4>
+        <h4
+          className="cheat-sheet-title"
+          contentEditable={true}
+          onSelect={this.selectTitle}
+          onKeyUp={this.changeTitle.bind(this)}
+        >Cheat Name</h4>
         <ol className="cheat-steps">
           {
             this.state.steps.map(
@@ -124,6 +130,10 @@ class CheatSheet extends Component {
         }],
       });
     }
+  }
+
+  changeTitle({ target }) {
+    this.setState({ title: target.innerText });
   }
 }
 
