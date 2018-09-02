@@ -17,6 +17,13 @@ class App extends Component {
           <h1 className="App-title">Cheat Sheets</h1>
         </header>
         <ul style={{ listStyle: 'none' }}>
+          <li
+            tabIndex="1"
+            onClick={this.newSheet.bind(this)}
+            onKeyUp={this.newSheet.bind(this)}
+          >
+            + Cheat Sheet
+          </li>
           {
             this.state.sheets.map( sheet => (
               <li key={sheet.id}>
@@ -33,7 +40,9 @@ class App extends Component {
     this.newSheet();
   }
 
-  newSheet() {
+  newSheet(event) {
+    if (event && event.key && event.key !== ' ' && event.key !== 'Enter') return;
+
     const nextId = this.state.sheetId + 1;
 
     if (this.state.sheets.length) {
