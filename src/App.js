@@ -6,9 +6,13 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <h1 className="App-title">Add a Cheat Sheet</h1>
+          <h1 className="App-title">Cheat Sheets</h1>
         </header>
-        <CheatSheet />
+        <ul style={{ listStyle: 'none' }}>
+          <li>
+            <CheatSheet />
+          </li>
+        </ul>
       </div>
     );
   }
